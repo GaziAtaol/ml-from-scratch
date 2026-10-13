@@ -6,8 +6,8 @@ from knn import classify
 # ── CONFIG ────
 ASK_FILE_PATHS = False  # True  = ask user for file paths at runtime
                     # False = use hardcoded paths below
-TRAINING_FILE  = "iris_training 1.txt"
-TEST_FILE      = "iris_test 1.txt"
+TRAINING_FILE  = "iris_training_1.txt"
+TEST_FILE      = "iris_test_1.txt"
 HAS_LABEL      = True   # False if test file has no decision attribute
 CHART_MAX_K    = None   # None = full training set size, or e.g. 20
 CHART_ENABLED  = True   # False to skip chart entirely
