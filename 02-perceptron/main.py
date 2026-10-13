@@ -4,8 +4,8 @@ from trainer import train
 from evaluator import evaluate
 
 # ── CONFIG ────────────────────────────────────────────────
-TRAINING_FILE  = "iris_training.txt"
-TEST_FILE      = "iris_test.txt"
+TRAINING_FILE  = "training-data/iris_training.txt"
+TEST_FILE      = "test-data/iris_test.txt"
 LEARNING_RATE  = 0.1
 DECIMAL_SEP    = ","
 # ──────────────────────────────────────────────────────────

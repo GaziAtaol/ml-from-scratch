@@ -29,10 +29,12 @@ The perceptron learns a linear decision boundary using the **Delta (Widrow-Hoff)
 ├── trainer.py           # Training loop (Delta algorithm)
 ├── evaluator.py         # Evaluates accuracy on a test set
 ├── data_loader.py       # Reads tab-separated data files
-├── iris_training.txt    # Training set  (119 samples)
-├── iris_test.txt        # Test set      (30 samples)
-├── iris_training_hard.txt  # Harder training split (50 samples)
-└── iris_test_hard.txt      # Harder test split     (15 samples)
+├── training-data/
+│   ├── iris_training.txt       # Training set (120 samples)
+│   └── iris_training_hard.txt  # Harder training split (50 samples)
+└── test-data/
+    ├── iris_test.txt           # Test set (30 samples)
+    └── iris_test_hard.txt      # Harder test split (15 samples)
 ```
 
 ---
@@ -93,9 +95,9 @@ The program will:
 MPP2 Perceptron Classifier (Iris setosa)
 =======================================================
 
- Training file : iris_training.txt
- Test file     : iris_test.txt
- Training samples : 119
+ Training file : training-data/iris_training.txt
+ Test file     : test-data/iris_test.txt
+ Training samples : 120
  Test samples     : 30
  Attributes       : 4
  Learning rate    : 0.1
@@ -142,8 +144,8 @@ All tuneable constants are at the top of `main.py`:
 
 | Constant        | Default                | Description                       |
 |-----------------|------------------------|-----------------------------------|
-| `TRAINING_FILE` | `iris_training.txt`    | Path to the training data file    |
-| `TEST_FILE`     | `iris_test.txt`        | Path to the test data file        |
+| `TRAINING_FILE` | `training-data/iris_training.txt` | Path to the training data file    |
+| `TEST_FILE`     | `test-data/iris_test.txt` | Path to the test data file        |
 | `LEARNING_RATE` | `0.1`                  | Perceptron learning rate (η)      |
 | `DECIMAL_SEP`   | `,`                    | Decimal separator for user input  |
 

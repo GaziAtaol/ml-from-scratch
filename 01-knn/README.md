@@ -26,12 +26,14 @@ A from scratch implementation of the k Nearest Neighbours classification algorit
 ├── evaluator.py         # Evaluation engine and results printer
 ├── knn_gui.py           # Tkinter GUI (optional)
 │
-├── iris_training_1.txt  # Iris dataset — training split (120 samples)
-├── iris_test_1.txt      # Iris dataset — test split (30 samples)
-├── noisy_training.txt   # 2D noisy dataset — 3 classes
-├── noisy_test.txt       # 2D noisy dataset — test
-├── complex_training.txt # 4D dataset — 10 classes (alpha–kappa)
-├── complex_test.txt     # 4D dataset — test
+├── training-data/
+│   ├── iris_training_1.txt   # Iris dataset, training split (120 samples)
+│   ├── noisy_training.txt    # 2D noisy dataset, 3 classes
+│   └── complex_training.txt  # 4D dataset, 10 classes (alpha to kappa)
+├── test-data/
+│   ├── iris_test_1.txt       # Iris dataset, test split (30 samples)
+│   ├── noisy_test.txt        # 2D noisy dataset, test
+│   └── complex_test.txt      # 4D dataset, test
 │
 ├── test_knn.py          # Quick manual test script
 └── test_data_loader.py  # Data loader sanity check
@@ -107,8 +109,8 @@ python main.py
 
 ```python
 ASK_FILE_PATHS = False          # True = prompt for paths, False = use below
-TRAINING_FILE  = "iris_training_1.txt"
-TEST_FILE      = "iris_test_1.txt"
+TRAINING_FILE  = "training-data/iris_training_1.txt"
+TEST_FILE      = "test-data/iris_test_1.txt"
 HAS_LABEL      = True           # False if test file has no class column
 CHART_MAX_K    = None           # None = full training set, or e.g. 20
 CHART_ENABLED  = True
@@ -122,8 +124,8 @@ GUI_ENABLED    = True           # True = launch GUI, False = terminal
         k-NN Classifier
 ============================================================
 
-Training file    : iris_training_1.txt
-Test file        : iris_test_1.txt
+Training file    : training-data/iris_training_1.txt
+Test file        : test-data/iris_test_1.txt
 Training samples : 120
 Test samples     : 30
 Attributes       : 4

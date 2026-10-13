@@ -1,10 +1,10 @@
 from knn import classify
 from data_loader import load_data
 
-#train = load_data('noisy_training.txt')
-#test  = load_data('noisy_test.txt')
-train = load_data('iris_training_1.txt')
-test  = load_data('iris_test_1.txt')
+#train = load_data('training-data/noisy_training.txt')
+#test  = load_data('test-data/noisy_test.txt')
+train = load_data('training-data/iris_training_1.txt')
+test  = load_data('test-data/iris_test_1.txt')
 k = int(input("Enter k: "))
 
 print()
