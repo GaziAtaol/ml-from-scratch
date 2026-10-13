@@ -1,14 +1,14 @@
-# k-NN Classifier
+# k NN Classifier
 
-A from-scratch implementation of the k-Nearest Neighbours classification algorithm in Python, with a terminal interface, optional GUI, and accuracy visualization.
+A from scratch implementation of the k Nearest Neighbours classification algorithm in Python, with a terminal interface, optional GUI, and accuracy visualization.
 
 ---
 
 ## Features
 
-- Pure Python kNN — no scikit-learn or ML libraries
+- Pure Python kNN no scikit-learn or ML libraries
 - Euclidean distance across all attributes (dynamic, not hardcoded)
-- Distance-based tie-breaking when majority vote results in a draw
+- Distance based tie breaking when majority vote results in a draw
 - Labeled and unlabeled test data support
 - Accuracy vs k chart (matplotlib)
 - Optional Tkinter GUI with file browser, live classification, and embedded chart
@@ -53,8 +53,8 @@ d(x, y) = sqrt( Σ (xi − yi)² )
 
 1. Compute distance from the test sample to every training sample.
 2. Sort by distance ascending, take the `k` closest.
-3. **Majority vote** — the class with the most neighbours wins.
-4. **Tie-breaking** — if two or more classes tie, the class of the single closest neighbour wins. Tie resolution is always distance-based.
+3. **Majority vote** the class with the most neighbours wins.
+4. **Tie-breaking** if two or more classes tie, the class of the single closest neighbour wins. Tie resolution is always distance based.
 
 ### Tie-breaking detail
 
@@ -71,11 +71,11 @@ This guarantees a deterministic result without any arbitrary random choice.
 
 ## File Format
 
-Tab-separated columns, comma as decimal separator. Last column is the class label (optional).
+Tab separated columns, comma as decimal separator. Last column is the class label (optional).
 
 ```
-5,1    3,5    1,4    0,2    Iris-setosa
-6,4    3,2    4,5    1,5    Iris-versicolor
+5,1    3,5    1,4    0,2    Iris setosa
+6,4    3,2    4,5    1,5    Iris versicolor
 ```
 
 The loader handles:
@@ -151,7 +151,7 @@ Set `GUI_ENABLED = True` in `main.py`. The GUI provides:
 - k selector (spinner)
 - Evaluate button with scrollable results panel
 - Accuracy vs k chart in a separate window (computed in a background thread)
-- Manual sample classifier — enter attribute values and predict on the fly
+- Manual sample classifier enter attribute values and predict on the fly
 
 ---
 
