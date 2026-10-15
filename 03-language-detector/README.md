@@ -64,7 +64,7 @@ evaluator.py     prediction, confusion matrix, precision, recall and F1
 
 ## Results
 
-Results of one run on the 30 test files. The weights start at random values, so the numbers change from run to run.
+Results of one run on the 30 test files. The weights start at random values, so the numbers change from run to run (see the repeated runs below).
 
 | Variant | Training | Test accuracy | Macro F1 |
 |---|---|---|---|
@@ -81,9 +81,19 @@ Confusion matrix of variant 1 (rows are the true language):
 
 One German text was classified as Polish.
 
+### Repeated runs
+
+Variant 1 was run 15 times on the same data. It converged every time, but the test accuracy depends on the random start:
+
+| Correct of 30 | 25 | 26 | 27 | 28 | 29 | 30 |
+|---|---|---|---|---|---|---|
+| Runs | 1 | 2 | 2 | 1 | 2 | 7 |
+
+Variant 2 was run 3 times and classified all 30 test texts correctly each time. Three runs are too few to claim that it always does.
+
 ## Notes
 
 * **Variant 2 never reaches its stopping condition.** Both the inputs and the weights have unit length, so `|net|` can never exceed 1. Reaching `net` close to +1 for one language and close to -1 for all others, on every training text, is not possible with this data. The largest error stays at about 1.077 after the first 100 iterations. The classification still works, because the prediction only compares `net` values and does not need them to reach the targets.
-* **The two variants are not ranked by these results.** The difference between 29 and 30 correct texts is a single file out of 30.
+* **The two variants are not ranked firmly by these results.** In the repeated runs variant 1 ranged from 25 to 30 correct texts and variant 2 stayed at 30, but the sample of runs is small.
 * The test set is small, so each text changes the accuracy by 3.3 percentage points.
 * Letter frequencies cannot separate closely related languages well, and the diacritics that distinguish many languages are not used.

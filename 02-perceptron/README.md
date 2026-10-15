@@ -24,7 +24,7 @@ The perceptron learns a linear decision boundary using the **Delta (Widrow-Hoff)
 
 ```
 .
-├── main.py              # Entry point – wires everything together and runs the interactive CLI
+├── main.py              # Entry point, wires everything together and runs the interactive CLI
 ├── perceptron.py        # Perceptron class (net, step, update)
 ├── trainer.py           # Training loop (Delta algorithm)
 ├── evaluator.py         # Evaluates accuracy on a test set
