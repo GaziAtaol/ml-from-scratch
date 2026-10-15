@@ -3,12 +3,10 @@ from tkinter import ttk, filedialog, messagebox, scrolledtext
 import threading
 import os
 
-# ── Project imports ──
 from data_loader import load_data, get_num_attributes
 from knn import classify
 from evaluator import evaluate
 
-# Try matplotlib (optional for chart)
 try:
     import matplotlib
     matplotlib.use("TkAgg")
@@ -27,7 +25,6 @@ class KNNApp(tk.Tk):
         self.configure(bg="#1e1e2e")
         self.resizable(True, True)
 
-        # ── State ──
         self.training_data = None
         self.test_data = None
         self.num_attributes = 0
@@ -38,7 +35,6 @@ class KNNApp(tk.Tk):
         self._build_styles()
         self._build_ui()
 
-    # ────────────────────────── STYLES ──────────────────────────
     def _build_styles(self):
         self.style = ttk.Style(self)
         self.style.theme_use("clam")
@@ -65,23 +61,19 @@ class KNNApp(tk.Tk):
 
         self.colors = {"bg": BG, "card": CARD, "fg": FG, "accent": ACCENT}
 
-    # ────────────────────────── UI BUILD ──────────────────────────
     def _build_ui(self):
-        # Header
+
         ttk.Label(self, text="k-NN Classifier", style="Header.TLabel").pack(pady=(16, 4))
 
-        # Main container with two columns
         main = ttk.Frame(self)
         main.pack(fill="both", expand=True, padx=16, pady=8)
         main.columnconfigure(0, weight=1)
         main.columnconfigure(1, weight=2)
         main.rowconfigure(0, weight=1)
 
-        # ── LEFT PANEL ──
         left = ttk.Frame(main, style="Card.TFrame")
         left.grid(row=0, column=0, sticky="nsew", padx=(0, 8))
 
-        # File loading section
         self._section_label(left, "📂  Data Loading")
 
         frm_train = ttk.Frame(left, style="Card.TFrame")
@@ -105,7 +97,6 @@ class KNNApp(tk.Tk):
         self.info_label = ttk.Label(left, text="No data loaded yet.", style="Sub.TLabel", wraplength=280)
         self.info_label.pack(padx=12, pady=(0, 8), anchor="w")
 
-        # k selection & evaluate
         self._section_label(left, "⚙️  Classification")
 
         frm_k = ttk.Frame(left, style="Card.TFrame")
@@ -121,7 +112,6 @@ class KNNApp(tk.Tk):
         if HAS_MATPLOTLIB:
             ttk.Button(left, text="Show Accuracy Chart", command=self._show_chart).pack(padx=12, pady=(0, 6), fill="x")
 
-        # New sample classification
         self._section_label(left, "🔍  Classify New Sample")
 
         self.new_sample_frame = ttk.Frame(left, style="Card.TFrame")
@@ -134,7 +124,6 @@ class KNNApp(tk.Tk):
         self.predict_label = ttk.Label(left, text="", style="Card.TLabel", font=("Segoe UI", 11, "bold"))
         self.predict_label.pack(padx=12, pady=(0, 12))
 
-        # ── RIGHT PANEL ──
         right = ttk.Frame(main, style="Card.TFrame")
         right.grid(row=0, column=1, sticky="nsew")
 
@@ -147,7 +136,6 @@ class KNNApp(tk.Tk):
         )
         self.output_text.pack(fill="both", expand=True, padx=12, pady=(0, 12))
 
-    # ────────────────────────── HELPERS ──────────────────────────
     def _section_label(self, parent, text):
         ttk.Label(parent, text=text, style="Card.TLabel",
                   font=("Segoe UI", 11, "bold")).pack(anchor="w", padx=12, pady=(12, 2))
@@ -173,7 +161,6 @@ class KNNApp(tk.Tk):
         if p:
             self.test_path_var.set(p)
 
-    # ────────────────────────── ACTIONS ──────────────────────────
     def _load_data(self):
         train_path = self.train_path_var.get().strip()
         test_path = self.test_path_var.get().strip()
@@ -199,7 +186,6 @@ class KNNApp(tk.Tk):
             self._log(f"  Test samples     : {len(self.test_data)}")
             self._log(f"  Attributes       : {self.num_attributes}")
 
-            # Build new-sample input fields
             self._build_sample_inputs()
 
         except Exception as e:
@@ -230,7 +216,6 @@ class KNNApp(tk.Tk):
         self._clear_log()
         self._log(f"Evaluating with k={k} ...\n")
 
-        # Redirect print output to our text widget
         import io, sys
         buffer = io.StringIO()
         old_stdout = sys.stdout
@@ -274,7 +259,6 @@ class KNNApp(tk.Tk):
         max_k = len(self.training_data)
         current_k = self.k_var.get()
 
-        # Run in thread to keep UI responsive
         def compute():
             ks = list(range(1, max_k + 1))
             accs = []
@@ -282,7 +266,6 @@ class KNNApp(tk.Tk):
                 correct = sum(1 for s in self.test_data if classify(self.training_data, s, k) == s["label"])
                 accs.append((correct / len(self.test_data)) * 100)
 
-            # Plot in main thread
             self.after(0, lambda: self._draw_chart(ks, accs, current_k))
 
         self._log("\nCalculating accuracy for all k values...")
@@ -315,7 +298,6 @@ class KNNApp(tk.Tk):
         canvas.get_tk_widget().pack(fill="both", expand=True)
 
         self._log("Chart displayed.")
-
 
 if __name__ == "__main__":
     app = KNNApp()

@@ -3,12 +3,10 @@ from perceptron import Perceptron
 from trainer import train
 from evaluator import evaluate
 
-# ── CONFIG ────────────────────────────────────────────────
 TRAINING_FILE  = "training-data/iris_training.txt"
 TEST_FILE      = "test-data/iris_test.txt"
 LEARNING_RATE  = 0.1
 DECIMAL_SEP    = ","
-# ──────────────────────────────────────────────────────────
 
 
 def ask_yes_no(prompt):
@@ -20,6 +18,7 @@ def ask_yes_no(prompt):
             return False
         else:
             print("  Please answer yes or no.")
+
 
 def get_new_sample(num_attributes):
     attributes = []
@@ -35,6 +34,7 @@ def get_new_sample(num_attributes):
                 print(f"Invalid input. Please enter a number (e.g. 5{DECIMAL_SEP}1).")
 
     return {"attributes": attributes, "label": None}
+
 
 def main():
     print("=" * 55)

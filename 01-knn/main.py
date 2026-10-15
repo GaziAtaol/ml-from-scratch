@@ -3,17 +3,15 @@ from data_loader import load_data, get_num_attributes
 from evaluator import evaluate
 from knn import classify
 
-# ── CONFIG ────
-ASK_FILE_PATHS = False  # True  = ask user for file paths at runtime
-                    # False = use hardcoded paths below
+ASK_FILE_PATHS = False
+
 TRAINING_FILE  = "training-data/iris_training_1.txt"
 TEST_FILE      = "test-data/iris_test_1.txt"
-HAS_LABEL      = True   # False if test file has no decision attribute
-CHART_MAX_K    = None   # None = full training set size, or e.g. 20
-CHART_ENABLED  = True   # False to skip chart entirely
-DECIMAL_SEP    = ","    # decimal separator in data files ("," or ".")
-GUI_ENABLED    = True  # True = launch GUI, False = terminal mode
-# ────
+HAS_LABEL      = True
+CHART_MAX_K    = None
+CHART_ENABLED  = True
+DECIMAL_SEP    = ","
+GUI_ENABLED    = True
 
 
 def get_k_from_user(max_k):
@@ -63,17 +61,6 @@ def get_new_sample(num_attributes):
 
 
 def ask_yes_no(prompt):
-    '''
-
-     while True:
-        answer = input(prompt).strip().lower()
-        if answer in ("yes", "y"):
-            return True
-        elif answer in ("no", "n"):
-            return False
-        else:
-            print("  Please answer yes or no.")
-        '''
 
     answer = input(prompt).strip().lower()
     while answer not in ["yes", "no"]:
@@ -136,7 +123,6 @@ def main():
     print("        k-NN Classifier")
     print("=" * 60)
 
-    # ── Step 1: Load data ────
     if ASK_FILE_PATHS:
         training_file, test_file = get_file_paths()
     else:
@@ -154,22 +140,18 @@ def main():
     print(f"Test samples     : {len(test_data)}")
     print(f"Attributes       : {num_attributes}")
 
-    # ── Step 2: Get k from user ────
     print()
     k = get_k_from_user(max_k)
 
-    # ── Step 3: Evaluate on test set ────
     print(f"\n--- Evaluating test set with k={k} ---")
     evaluate(training_data, test_data, k)
 
-    # ── Step 4: Accuracy chart ────
     if CHART_ENABLED:
         chart_max = CHART_MAX_K if CHART_MAX_K is not None else max_k
         chart_max = min(chart_max, max_k)
         if ask_yes_no(f"\nShow accuracy chart for k=1 to {chart_max}? (yes/no): "):
             plot_accuracy_chart(training_data, test_data, current_k=k)
 
-    # ── Step 5: Classify new samples (loop) ────
     print("\n--- Classify new samples ---")
     while True:
         sample = get_new_sample(num_attributes)
@@ -177,15 +159,12 @@ def main():
 
         print(f"\n  Predicted class : {result}")
 
-
-
         print()
         if not ask_yes_no("Classify another sample? (yes/no): "):
             break
 
     print("\nGoodbye!")
     print("=" * 60)
-
 
 if __name__ == "__main__":
     if GUI_ENABLED:

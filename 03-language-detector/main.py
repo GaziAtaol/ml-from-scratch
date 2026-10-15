@@ -7,6 +7,7 @@ TRAINING_FOLDER = "Training data"
 TEST_FOLDER     = "test data"
 LEARNING_RATE   = 0.01
 
+
 def ask_variant():
     while True:
         print("\nSelect variant:")
@@ -16,6 +17,7 @@ def ask_variant():
         if choice in ("1", "2"):
             return int(choice)
         print("Please enter 1 or 2.")
+
 
 def read_text():
     print("Paste text. Press Enter on empty line to predict:")
@@ -36,6 +38,7 @@ def read_text():
             lines.append(line)
     return "\n".join(lines).strip()
 
+
 def ask_yes_no(prompt):
     print(prompt + " (yes/no): ", end="", flush=True)
     while True:
@@ -47,7 +50,7 @@ def ask_yes_no(prompt):
             return True
         if answer in ("no", "n"):
             return False
-        # silently skip garbage lines from paste overflow
+
 
 def main():
     print("=" * 55)
@@ -60,7 +63,6 @@ def main():
     perceptrons    = []
     language_names = []
 
-    # ── Training ──────────────────────────────────────────────────────
     if ask_yes_no("\nStart training?"):
         print(f"\nLoading training data from '{TRAINING_FOLDER}'...")
         dataset = load_dataset(TRAINING_FOLDER, normalize=normalize)
@@ -86,7 +88,6 @@ def main():
         print("Training skipped. Exiting.")
         return
 
-    # ── Testing ───────────────────────────────────────────────────────
     if ask_yes_no("\nStart testing?"):
         print(f"\nLoading test data from '{TEST_FOLDER}'...")
         test_data = load_dataset(TEST_FOLDER, normalize=normalize)
@@ -121,7 +122,6 @@ def main():
             print(f"\n--- Detailed Metrics ---")
             evaluate(perceptrons, language_names, test_data, variant=variant)
 
-    # ── Classify loop ─────────────────────────────────────────────────
     if ask_yes_no("\nDo you want to classify text?"):
         while True:
             text = read_text()
