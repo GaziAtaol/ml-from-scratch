@@ -20,7 +20,7 @@ A from scratch implementation of the k Nearest Neighbours classification algorit
 ## Project Structure
 
 ```
-├── main.py              # Entry point — terminal mode or GUI launcher
+├── main.py              # Entry point terminal mode or GUI launcher
 ├── knn.py               # Core algorithm: distance, neighbours, classify
 ├── data_loader.py       # File parser and label normalizer
 ├── evaluator.py         # Evaluation engine and results printer
@@ -58,7 +58,7 @@ d(x, y) = sqrt( Σ (xi − yi)² )
 3. **Majority vote** the class with the most neighbours wins.
 4. **Tie-breaking** if two or more classes tie, the class of the single closest neighbour wins. Tie resolution is always distance based.
 
-### Tie-breaking detail
+### Tie breaking detail
 
 ```python
 # neighbours already sorted by distance ascending
@@ -163,7 +163,7 @@ Set `GUI_ENABLED = True` in `main.py`. The GUI provides:
 |---|---|---|---|---|
 | Iris | 4 | 3 | 120 | 30 |
 | Noisy | 2 | 3 (a, b, c) | 90 | 30 |
-| Complex | 4 | 10 (alpha–kappa) | ~200 | 60 |
+| Complex | 4 | 10 (alpha to kappa) | ~200 | 60 |
 
 ---
 
