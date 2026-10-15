@@ -1,13 +1,7 @@
 import math
 
+
 def separate_by_class(samples):
-    '''
-     {
-        "iris-setosa":     [[5.1, 3.5, 1.4, 0.2], [4.9, 3.0, 1.4, 0.2], ...],
-        "iris-versicolor": [[7.0, 3.2, 4.7, 1.4], ...],
-        "iris-virginica":  [[6.3, 3.3, 6.0, 2.5], ...]
-     }
-    '''
     separated = {}
     for sample in samples:
         label = sample['label']
@@ -15,6 +9,7 @@ def separate_by_class(samples):
             separated[label] = []
         separated[label].append(sample["attributes"])
     return separated
+
 
 def calculate_mean(values):
 
@@ -25,11 +20,8 @@ def calculate_mean(values):
         count += 1
     return total / count
 
+
 def calculate_stdev(values, mean):
-    '''
-    total / count = 0.0875 / 4 = 0.021875
-    √0.021875 = 0.1479 → bu, standart sapmadır (σ).
-    '''
     total = 0.0
     count = 0
     for v in values:
@@ -37,14 +29,8 @@ def calculate_stdev(values, mean):
         count += 1
     return math.sqrt(total / count)
 
+
 def calculate_class_statistics(separated):
-    '''
- {
-    "iris-setosa":     [(μ, σ), (μ, σ), (μ, σ), (μ, σ)],
-    "iris-versicolor": [(μ, σ), (μ, σ), (μ, σ), (μ, σ)],
-    "iris-virginica":  [(μ, σ), (μ, σ), (μ, σ), (μ, σ)]
-}
-    '''
     statistics = {}
     for label, rows in separated.items():
         num_attributes = len(rows[0])
@@ -59,6 +45,7 @@ def calculate_class_statistics(separated):
         statistics[label] = stats
     return statistics
 
+
 def calculate_priors(separated, total_count):
     priors = {}
     for label, rows in separated.items():
@@ -67,6 +54,7 @@ def calculate_priors(separated, total_count):
             count += 1
         priors[label] = count / total_count
     return priors
+
 
 def train(samples):
     separated = separate_by_class(samples)
@@ -87,6 +75,7 @@ def train(samples):
         print()
 
     return statistics, priors, separated
+
 
 def check_and_apply_smoothing(statistics, priors, separated, epsilon=1e-6):
     print("=== SMOOTHING CONTROL ===\n")
@@ -116,9 +105,11 @@ def check_and_apply_smoothing(statistics, priors, separated, epsilon=1e-6):
 
     return statistics
 
+
 def gaussian_probability(x, mean, stdev):
     exponent = -((x - mean) ** 2) / (2 * stdev ** 2)
     return (1 / (stdev * math.sqrt(2 * math.pi))) * math.exp(exponent)
+
 
 def calculate_class_probabilities(statistics, priors, input_vector):
     probabilities = {}
@@ -129,6 +120,7 @@ def calculate_class_probabilities(statistics, priors, input_vector):
             probabilities[label] = probabilities[label] * gaussian_probability(input_vector[i], mean, stdev)
     return probabilities
 
+
 def predict(statistics, priors, input_vector):
     probabilities = calculate_class_probabilities(statistics, priors, input_vector)
     best_label = None
@@ -138,6 +130,7 @@ def predict(statistics, priors, input_vector):
             best_label = label
             best_prob = probabilities[label]
     return best_label, best_prob
+
 
 def evaluate(statistics, priors, test_data):
     correct = 0
@@ -159,6 +152,7 @@ def evaluate(statistics, priors, test_data):
     print(f"Accuracy: {accuracy:.2f}%\n")
 
     return accuracy, predictions
+
 
 def build_confusion_matrix(predictions):
     labels = []

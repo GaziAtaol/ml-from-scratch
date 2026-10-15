@@ -7,6 +7,7 @@ from algorithm import (
 )
 from data_loader import load_data
 
+
 def manual_input_loop(statistics, priors):
     print("=== MANUEL CLASSIFICATION ===")
     print("PRESS Q TO EXIT.\n")
@@ -54,6 +55,7 @@ def manual_input_loop(statistics, priors):
         print(f"\n  INPUT: {attributes}")
         print(f"  PREDICT: {predicted}")
         print(f"  PROBABILITY: {prob:.6f}\n")
+
 
 def main():
 

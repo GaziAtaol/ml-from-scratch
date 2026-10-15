@@ -1,7 +1,9 @@
 import re
 
+
 def normalize_label(label):
     return re.sub(r"[\s_]+", "-", label.strip().lower())
+
 
 def load_data(filepath, has_label=True, binary=False):
 
@@ -28,6 +30,7 @@ def load_data(filepath, has_label=True, binary=False):
             samples.append({"attributes": attributes, "label": label})
 
     return samples
+
 
 def get_num_attributes(samples):
     if not samples:
